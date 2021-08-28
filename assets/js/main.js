@@ -78,5 +78,22 @@ function nextMusic(){
     playingSong(); 
 }
 
+// play or pause button event
+playPauseBtn.addEventListener("click", ()=>{
+    const isMusicPlay = container.classList.contains("paused");
+    //if isPlayMusic is true then call pauseMusic else call playMusic
+    isMusicPlay ? pauseMusic() : playMusic();
+    playingSong();
+});
+
+//prev music button event
+prevBtn.addEventListener("click", ()=>{
+    prevMusic();
+});
+
+//next music button event
+nextBtn.addEventListener("click", ()=>{
+    nextMusic();
+});
 
 

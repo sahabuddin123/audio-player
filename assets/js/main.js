@@ -153,3 +153,30 @@ repeatBtn.addEventListener("click", ()=>{
   }
 });
 
+//code for what to do after song ended
+mainAudio.addEventListener("ended", ()=>{
+    // we'll do according to the icon means if user has set icon to
+    // loop song then we'll repeat the current song and will do accordingly
+    let getText = repeatBtn.innerText; //getting this tag innerText
+    switch(getText){
+      case "repeat":
+        nextMusic(); //calling nextMusic function
+        break;
+      case "repeat_one":
+        mainAudio.currentTime = 0; //setting audio current time to 0
+        loadMusic(musicIndex); //calling loadMusic function with argument, in the argument there is a index of current song
+        playMusic(); //calling playMusic function
+        break;
+      case "shuffle":
+        let randIndex = Math.floor((Math.random() * allMusic.length) + 1); //genereting random index/numb with max range of array length
+        do{
+          randIndex = Math.floor((Math.random() * allMusic.length) + 1);
+        }while(musicIndex == randIndex); //this loop run until the next random number won't be the same of current musicIndex
+        musicIndex = randIndex; //passing randomIndex to musicIndex
+        loadMusic(musicIndex);
+        playMusic();
+        playingSong();
+        break;
+    }
+  });
+

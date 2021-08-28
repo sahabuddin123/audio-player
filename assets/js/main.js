@@ -25,7 +25,30 @@ let moreMusicBtn = document.querySelector("#more-music");
 // select more music list close
 let closemoreMusic = document.querySelector("#close");
 
+//get music index number 
 let musicIndex = Math.floor((Math.random() * allMusic.length) + 1);
-
-console.log(musicIndex);
+// default music paused true
 isMusicPaused = true;
+
+//when rload widow
+window.addEventListener("load", ()=>{
+    loadMusic(musicIndex);
+    playingSong(); 
+});
+
+// Load Music 
+function loadMusic(indexNumb){
+    musicName.innerText = allMusic[indexNumb - 1].name;
+    musicArtist.innerText = allMusic[indexNumb - 1].artist;
+    musicImg.src = `assets/img/${allMusic[indexNumb - 1].src}.jpg`;
+    mainAudio.src = `assets/song/${allMusic[indexNumb - 1].src}.mp3`;
+  }
+
+// Play Music
+function playMusic(){
+    container.classList.add("paused");
+    playPauseBtn.querySelector("i").innerText = "pause";
+    mainAudio.play();
+}
+
+

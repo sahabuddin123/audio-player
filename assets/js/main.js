@@ -24,3 +24,8 @@ let musicList = document.querySelector(".music-list");
 let moreMusicBtn = document.querySelector("#more-music");
 // select more music list close
 let closemoreMusic = document.querySelector("#close");
+
+let musicIndex = Math.floor((Math.random() * allMusic.length) + 1);
+
+console.log(musicIndex);
+isMusicPaused = true;

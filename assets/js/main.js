@@ -121,5 +121,35 @@ mainAudio.addEventListener("timeupdate", (e)=>{
       currentSec = `0${currentSec}`;
     }
     musicCurrentTime.innerText = `${currentMin}:${currentSec}`;
-  });
+});
+
+// update playing song currentTime on according to the progress bar width
+progressArea.addEventListener("click", (e)=>{
+    let progressWidth = progressArea.clientWidth; //getting width of progress bar
+    let clickedOffsetX = e.offsetX; //getting offset x value
+    let songDuration = mainAudio.duration; //getting song total duration
+    mainAudio.currentTime = (clickedOffsetX / progressWidth) * songDuration;
+    playMusic(); //calling playMusic function
+    playingSong();
+});
+
+//change loop, shuffle, repeat icon onclick
+const repeatBtn = wrapper.querySelector("#repeat-plist");
+repeatBtn.addEventListener("click", ()=>{
+  let getText = repeatBtn.innerText; //getting this tag innerText
+  switch(getText){
+    case "repeat":
+      repeatBtn.innerText = "repeat_one";
+      repeatBtn.setAttribute("title", "Song looped");
+      break;
+    case "repeat_one":
+      repeatBtn.innerText = "shuffle";
+      repeatBtn.setAttribute("title", "Playback shuffled");
+      break;
+    case "shuffle":
+      repeatBtn.innerText = "repeat";
+      repeatBtn.setAttribute("title", "Playlist looped");
+      break;
+  }
+});
 

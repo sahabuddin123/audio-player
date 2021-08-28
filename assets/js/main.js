@@ -57,3 +57,14 @@ function pauseMusic(){
     playPauseBtn.querySelector("i").innerText = "play_arrow";
     mainAudio.pause();
 }
+
+//prev music function
+function prevMusic(){
+    musicIndex--; //decrement of musicIndex by 1
+    //if musicIndex is less than 1 then musicIndex will be the array length so the last music play
+    musicIndex < 1 ? musicIndex = allMusic.length : musicIndex = musicIndex;
+    loadMusic(musicIndex);
+    playMusic();
+    playingSong(); 
+}
+

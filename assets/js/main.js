@@ -134,7 +134,7 @@ progressArea.addEventListener("click", (e)=>{
 });
 
 //change loop, shuffle, repeat icon onclick
-const repeatBtn = wrapper.querySelector("#repeat-plist");
+const repeatBtn = container.querySelector("#repeat-plist");
 repeatBtn.addEventListener("click", ()=>{
   let getText = repeatBtn.innerText; //getting this tag innerText
   switch(getText){
@@ -212,4 +212,34 @@ for (let i = 0; i < allMusic.length; i++) {
     liAudioDuartionTag.innerText = `${totalMin}:${totalSec}`; //passing total duation of song
     liAudioDuartionTag.setAttribute("t-duration", `${totalMin}:${totalSec}`); //adding t-duration attribute with total duration value
   });
+}
+
+//play particular song from the list onclick of li tag
+function playingSong(){
+    const allLiTag = ulTag.querySelectorAll("li");
+    
+    for (let j = 0; j < allLiTag.length; j++) {
+      let audioTag = allLiTag[j].querySelector(".audio-duration");
+      
+      if(allLiTag[j].classList.contains("playing")){
+        allLiTag[j].classList.remove("playing");
+        let adDuration = audioTag.getAttribute("t-duration");
+        audioTag.innerText = adDuration;
+      }
+      //if the li tag index is equal to the musicIndex then add playing class in it
+      if(allLiTag[j].getAttribute("li-index") == musicIndex){
+        allLiTag[j].classList.add("playing");
+        audioTag.innerText = "Playing";
+      }
+      allLiTag[j].setAttribute("onclick", "clicked(this)");
+    }
+}
+
+//particular li clicked function
+function clicked(element){
+    let getLiIndex = element.getAttribute("li-index");
+    musicIndex = getLiIndex; //updating current song index with clicked li index
+    loadMusic(musicIndex);
+    playMusic();
+    playingSong();
 }

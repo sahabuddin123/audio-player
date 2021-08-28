@@ -33,7 +33,7 @@ isMusicPaused = true;
 //when rload widow
 window.addEventListener("load", ()=>{
     loadMusic(musicIndex);
-    //playingSong(); 
+    playingSong(); 
 });
 
 // Load Music 
@@ -96,4 +96,30 @@ nextBtn.addEventListener("click", ()=>{
     nextMusic();
 });
 
+// update progress bar width according to music current time
+mainAudio.addEventListener("timeupdate", (e)=>{
+    const currentTime = e.target.currentTime; //getting playing song currentTime
+    const duration = e.target.duration; //getting playing song total duration
+    let progressWidth = (currentTime / duration) * 100;
+    progressBar.style.width = `${progressWidth}%`;
+    let musicCurrentTime = container.querySelector(".current-time"),
+    musicDuartion = container.querySelector(".max-duration");
+    mainAudio.addEventListener("loadeddata", ()=>{
+      // update song total duration
+      let mainAdDuration = mainAudio.duration;
+      let totalMin = Math.floor(mainAdDuration / 60);
+      let totalSec = Math.floor(mainAdDuration % 60);
+      if(totalSec < 10){ //if sec is less than 10 then add 0 before it
+        totalSec = `0${totalSec}`;
+      }
+      musicDuartion.innerText = `${totalMin}:${totalSec}`;
+    });
+    // update playing song current time
+    let currentMin = Math.floor(currentTime / 60);
+    let currentSec = Math.floor(currentTime % 60);
+    if(currentSec < 10){ //if sec is less than 10 then add 0 before it
+      currentSec = `0${currentSec}`;
+    }
+    musicCurrentTime.innerText = `${currentMin}:${currentSec}`;
+  });
 

@@ -51,4 +51,9 @@ function playMusic(){
     mainAudio.play();
 }
 
-
+//pause music function
+function pauseMusic(){
+    container.classList.remove("paused");
+    playPauseBtn.querySelector("i").innerText = "play_arrow";
+    mainAudio.pause();
+}

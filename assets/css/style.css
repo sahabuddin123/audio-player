@@ -134,3 +134,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  .controls i:nth-child(2),
+.controls i:nth-child(4){
+  font-size: 43px;
+}
